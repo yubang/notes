@@ -1,4 +1,4 @@
-html,body{width:100%;height:100%;margin:0;padding:0;}
+html,body{height:100%;}
 a{text-decoration:none;}
 header{
     width:100%;
@@ -24,7 +24,7 @@ input[type='submit']{
     height:30px;
 }
 
-textArea{margin-left:1%;width:98%;height:100px;}
+textArea{margin-left:1%;width:97%;height:100px;}
 
 .content{width:100%;}
 
@@ -32,15 +32,13 @@ textArea{margin-left:1%;width:98%;height:100px;}
     margin-top:20px;
     width:100%;
     height:150px;
-    padding-left:10px;
-    padding-right:10px;
     background-color:#eee;
     text-align:center;
     display:table;
 }
 
 .noteContent{
-    width:70%;
+    width:65%;
     height:150px;
     float:left;
     vertical-align:middle;   
@@ -48,7 +46,7 @@ textArea{margin-left:1%;width:98%;height:100px;}
 }
 
 .noteDate{
-    width:30%;
+    width:35%;
     float:right;   
 }
 
@@ -71,8 +69,8 @@ textArea{margin-left:1%;width:98%;height:100px;}
 }
 
 .messageDiv{
-    margin:1%;
-    padding:5px;
+    margin-top:5px;
+    padding-top:5px;
     width:98%;
     border:2px solid skyblue;
 }

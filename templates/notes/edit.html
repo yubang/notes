@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ g.title }}</title>
         <link rel="stylesheet" href="/static/notes/base.css">
     </head>
@@ -9,9 +10,9 @@
         
         <form action="" method="post">
             <p align="center">
-                提醒日期：<input type="date" name="remindDate" required>
+                提醒日期：<input type="date" name="remindDate" value="{{ g.remindDate }}" required>
             </p>
-            <textArea name="message" required></textArea>
+            <textArea name="message" required>{{ g.message }}</textArea>
             <input type="submit" value="{{ g.submit }}">
         </form>    
         

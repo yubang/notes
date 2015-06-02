@@ -166,7 +166,31 @@ def notesManager():
     
 @notesApp.route("/edit",methods=['GET','POST'])
 def edit():
-    return ""
+    if request.method == "GET":
+        g.title = u"修改日程"
+        g.submit = u"修改"
+        
+        id=request.args.get("id","")
+        
+        dbSession=sessionMaker()
+        obj=dbSession.query(MessageModel).filter(MessageModel.id == id,MessageModel.uid == session['uid']).one()
+        dbSession.close()
+        
+        g.remindDate = obj.remindDate.strftime("%Y-%m-%d")
+        g.message = obj.message
+        
+        return render_template("notes/edit.html")
+    else:
+        id=request.args.get("id",None)
+        remindDate = request.form.get("remindDate",None)
+        message = request.form.get("message",None)
+        
+        dbSession = sessionMaker()
+        dbSession.query(MessageModel).filter(MessageModel.uid == session['uid'],MessageModel.id == id).update({"remindDate":remindDate,"message":message})
+        dbSession.commit()
+        dbSession.close()
+        
+        return redirect(url_for("notes.notesManager"))
 
 
 @notesApp.route("/delete")
