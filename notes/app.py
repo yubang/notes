@@ -25,6 +25,8 @@ def dealMessage(obj):
     "处理日程类"
     d=obj.remindDate-datetime.date.today()
     obj.date=d.days
+    if obj.date == 0:
+        obj.date = u"今"
     return obj
 
 @notesApp.route("/")
@@ -68,7 +70,7 @@ def account(requestType):
             
             dbSession = sessionMaker()
             query=dbSession.query(AccountModel)
-            obj=query.filter(username == username).first()
+            obj=query.filter(AccountModel.username == username).first()
             dbSession.close()
             
             if obj == None:
