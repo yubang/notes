@@ -11,7 +11,7 @@ from sqlalchemy.orm import mapper,sessionmaker
 import config
 import time
 
-db = create_engine("mysql://%s:%s@%s:%d/%s?charset=UTF8"%(config.MYSQL_USER,config.MYSQL_PASSWORD,config.MYSQL_HOST,config.MYSQL_PORT,config.MYSQL_DB),echo=True)
+db = create_engine("mysql://%s:%s@%s:%d/%s?charset=UTF8"%(config.MYSQL_USER,config.MYSQL_PASSWORD,config.MYSQL_HOST,config.MYSQL_PORT,config.MYSQL_DB),echo=config.DEBUG)
 
 accountTable = Table('notes_account',MetaData(db),
     Column('id',Integer,primary_key=True),

@@ -99,6 +99,7 @@ def account(requestType):
             dbSession.add(dao)
             try:
                 dbSession.commit()
+                session['uid']=dao.id
                 result=True
             except:
                 dbSession.rollback()
@@ -107,7 +108,6 @@ def account(requestType):
             dbSession.close()
             
             if result :
-                session['uid']=dao.id
                 return redirect(url_for("notes.index"))
             else:
                 return redirect(u"/notes/account/register?error=用户名已经被注册")

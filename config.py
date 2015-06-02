@@ -7,3 +7,4 @@ MYSQL_PASSWORD = "root"
 MYSQL_DB = "notes"
 
 secret_key = "123"
+DEBUG = True
