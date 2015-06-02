@@ -2,8 +2,8 @@
 
 from flask import Blueprint,render_template,g,request,redirect,url_for,session
 from functools import wraps
-from models import sessionMaker,AccountModel
-import hashlib
+from models import sessionMaker,AccountModel,MessageModel
+import hashlib,datetime
 
 
 notesApp=Blueprint("notes",__name__)
@@ -21,6 +21,12 @@ def checkUser(fn):
     return deal
 
 
+def dealMessage(obj):
+    "处理日程类"
+    d=obj.remindDate-datetime.date.today()
+    obj.date=d.days
+    return obj
+
 @notesApp.route("/")
 @checkUser
 def index():
@@ -32,7 +38,14 @@ def index():
 @checkUser   
 def getNotes():
     "获取日程"
-    g.lists=[1]
+    print session
+    dbSession=sessionMaker()
+    query=dbSession.query(MessageModel)
+    lists=query.filter(MessageModel.uid == session['uid'],MessageModel.status == 0,MessageModel.remindDate >= datetime.date.today()).order_by("remindDate,id").all()
+    dbSession.close()
+    
+    g.lists=map(dealMessage,lists)
+    
     return render_template("notes/notes.html")
 
 
@@ -105,4 +118,64 @@ def account(requestType):
 def exitAccount():
     "退出登录"
     del session['uid']
-    return redirect(url_for("notes.index"))                
+    return redirect(url_for("notes.index"))
+    
+
+@notesApp.route("/manageUi")
+@checkUser
+def manageUi():
+    "后台管理界面"
+    return render_template("notes/manageUi.html")
+
+@notesApp.route("/add",methods=['GET','POST'])
+@checkUser    
+def add():
+    "添加日程"
+    if request.method == "GET":
+        g.title = u"添加日程"
+        g.submit = u"添加"
+        return render_template("notes/edit.html")
+    else:
+        remindDate=request.form.get("remindDate",None)
+        message=request.form.get("message",None)
+        uid=session.get("uid",None)
+        dao=MessageModel(uid,message,remindDate)
+        dbSession=sessionMaker()
+        dbSession.add(dao)
+        try:
+            dbSession.commit()
+            r=True
+        except:
+            dbSession.rollback()
+            r=False
+        finally:
+            dbSession.close()
+        return redirect(url_for("notes.index"))
+        
+
+@notesApp.route("/notesManager")
+@checkUser
+def notesManager():
+    "日程管理"
+    dbSession=sessionMaker()
+    query=dbSession.query(MessageModel)
+    g.lists=query.filter(MessageModel.status != -1,MessageModel.uid == session['uid']).all()
+    dbSession.close()
+    return render_template("notes/notesManager.html")
+    
+    
+@notesApp.route("/edit",methods=['GET','POST'])
+def edit():
+    return ""
+
+
+@notesApp.route("/delete")
+@checkUser    
+def delete():
+    "删除日程"
+    id=request.args.get("id","")
+    dbSession=sessionMaker()
+    dbSession.query(MessageModel).filter(MessageModel.uid == session['uid'],MessageModel.id == id).update({"status":-1})
+    dbSession.commit()
+    dbSession.close()
+    return redirect(url_for("notes.notesManager"))

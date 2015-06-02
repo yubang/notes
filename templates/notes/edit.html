@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ g.title }}</title>
+        <link rel="stylesheet" href="/static/notes/base.css">
+    </head>
+    <body>
+        
+        <form action="" method="post">
+            <p align="center">
+                提醒日期：<input type="date" name="remindDate" required>
+            </p>
+            <textArea name="message" required></textArea>
+            <input type="submit" value="{{ g.submit }}">
+        </form>    
+        
+    </body>
+</html>

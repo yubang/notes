@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>日程管理</title>
+        <link rel="stylesheet" href="/static/notes/base.css">
+    </head>
+    <body>
+        
+        {% for obj in g.lists %}
+            <div class="messageDiv">
+                <a href="{{ url_for('notes.edit',id=obj.id) }}">编辑</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{{ url_for('notes.delete',id=obj.id) }}">删除</a>
+                <hr>
+                {{ obj.message }}
+            </div>
+        {% endfor %}
+        
+    </body>
+</html>

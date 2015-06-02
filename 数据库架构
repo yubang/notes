@@ -6,3 +6,13 @@ create table if not exists notes_account(
     primary key(id),
     unique(username)
 );
+
+create table if not exists notes_message(
+    id int(11) auto_increment,
+    uid int(11) not null,
+    message varchar(200) not null,
+    remindDate date not null,
+    status tinyint(1) not null default 0,
+    updateTime timestamp,
+    primary key(id)
+);

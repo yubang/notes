@@ -24,9 +24,12 @@ input[type='submit']{
     height:30px;
 }
 
+textArea{margin-left:1%;width:98%;height:100px;}
+
 .content{width:100%;}
 
 .noteDiv{
+    margin-top:20px;
     width:100%;
     height:150px;
     padding-left:10px;
@@ -65,4 +68,11 @@ input[type='submit']{
 .warningDiv font{
     width:100%;
     color:red;
+}
+
+.messageDiv{
+    margin:1%;
+    padding:5px;
+    width:98%;
+    border:2px solid skyblue;
 }
