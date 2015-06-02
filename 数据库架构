@@ -1,0 +1,8 @@
+create table if not exists notes_account(
+    id int(11) auto_increment,
+    username varchar(30) not null,
+    password varchar(32) not null,
+    createTime timestamp,
+    primary key(id),
+    unique(username)
+);

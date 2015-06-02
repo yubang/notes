@@ -1,0 +1,68 @@
+html,body{width:100%;height:100%;margin:0;padding:0;}
+a{text-decoration:none;}
+header{
+    width:100%;
+    height:50px;
+    background-color:#66FFFF;
+    line-height:50px;
+    padding-left:8px;
+}
+strong{font-size:30px;color:skyblue;}
+form{width:100%;}
+input[type='text'],input[type='password']{
+    margin-top:10px;
+    margin-left:1%;
+    padding:1px;
+    font-size:20px;
+    width:98%;
+}
+
+input[type='submit']{
+    margin-top:15px;
+    margin-left:35%;
+    width:30%;
+    height:30px;
+}
+
+.content{width:100%;}
+
+.noteDiv{
+    width:100%;
+    height:150px;
+    padding-left:10px;
+    padding-right:10px;
+    background-color:#eee;
+    text-align:center;
+    display:table;
+}
+
+.noteContent{
+    width:70%;
+    height:150px;
+    float:left;
+    vertical-align:middle;   
+    display:table-cell;   
+}
+
+.noteDate{
+    width:30%;
+    float:right;   
+}
+
+.table {
+    display: table;
+    height: 130px;
+    width:100%;
+    text-align: center;
+}
+
+.tableCell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.warningDiv{padding:15px;}
+.warningDiv font{
+    width:100%;
+    color:red;
+}
